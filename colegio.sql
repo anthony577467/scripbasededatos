@@ -4,6 +4,29 @@ CREATE DATABASE colegio_san_benito CHARSET utf8mb4;
 -- Usa la base de datos 'colegio_san_benito'
 USE colegio_san_benito;
 -- Creación de la tabla Estudiante
+CREATE TABLE formulario_consultas (
+ id_formulario INT AUTO_INCREMENT NOT NULL,
+  id INT NOT NULL,
+  nombre_a VARCHAR(20) NOT NULL,
+  apellidos_a VARCHAR(20) NOT NULL,
+  asunto TEXT NOT NULL,
+  fecha DATETIME NOT NULL,
+  grado NUMERIC(1,30) NOT NULL,
+  seccion VARCHAR(10) NOT NULL,
+  id_estudiante INT NOT NULL,
+  nombre_estudiante CHAR(30) NOT NULL,
+  apellido_estudiante CHAR(30) NOT NULL,
+
+  CONSTRAINT pk_formulario PRIMARY KEY (id_formulario),
+  CONSTRAINT pk_estudiante PRIMARY KEY (id_estudiante),
+  CONSTRAINT ck_grado CHECK (grado > 0 AND grado <= 12),
+  CONSTRAINT ck_seccion CHECK (seccion IN ('A', 'B', 'C', 'D', 'E')),
+  CONSTRAINT ck_nombre_a CHECK (nombre_a LIKE '[A-Za-z0-9 _]+'),
+  CONSTRAINT ck_apellidos_a CHECK (apellidos_a LIKE '[A-Za-z0-9 _]+'),
+  CONSTRAINT ck_asunto CHECK (asunto LIKE '[A-Za-z0-9 _.,!?]+'),
+  CONSTRAINT ck_nombre_estudiante CHECK (nombre_estudiante LIKE '[A-Za-z]+'),
+  CONSTRAINT ck_apellido_estudiante CHECK (apellido_estudiante LIKE '[A-Za-z]+')
+);
 CREATE TABLE Estudiante (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     Nombres VARCHAR(60) NOT NULL,
